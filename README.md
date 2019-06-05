@@ -10,7 +10,7 @@ Example of invoking a function and putting the result into S3
 
 ```yaml
     environment:
-      s3_hostname: fra1.digitaloceanspaces.com
+      s3_hostname: kubecon.fra1.digitaloceanspaces.com
       s3_secure: true
       s3_bucket_name: kubecon
 ```

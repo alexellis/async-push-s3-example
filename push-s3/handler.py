@@ -1,11 +1,12 @@
 from minio import Minio
 import json
 import uuid
-import os
+import os, sys
 
 def handle(body):
-    secure = True if os.getenv("s3_tls", "false") == "true" else False
+    secure = True if os.getenv("s3_secure", "false") == "true" else False
     bucket_name = os.getenv("s3_bucket_name")
+
     access_key = get_secret("access-key")
     secret_key = get_secret("secret-key")
 
@@ -14,7 +15,10 @@ def handle(body):
                   secret_key = secret_key,
                   secure = secure)
 
-    download_push(body.encode(), bucket_name, mc)
+    sys.stderr.write("Endpoint: {}, secure: {}\n".format(os.environ["s3_hostname"], secure))
+    file_out = download_push(body.encode(), bucket_name, mc)
+    res = {"file": file_out}
+    return json.dumps(res)
 
 def get_secret(key):
     val = ""

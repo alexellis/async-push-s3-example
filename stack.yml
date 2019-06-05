@@ -7,12 +7,13 @@ functions:
   push-s3:
     lang: python3
     handler: ./push-s3
-    image: alexellis2/push-s3:0.1.4
+    image: alexellis2/push-s3:0.1.7
     environment:
-      s3_hostname: fra1.digitaloceanspaces.com
+      s3_bucket_name: "kubecon"
+      s3_hostname: "fra1.digitaloceanspaces.com"
       s3_secure: true
-      s3_bucket_name: kubecon
       write_debug: true
+      combine_output: false
     secrets:
     - access-key
     - secret-key
