@@ -6,12 +6,13 @@ Example of invoking a function and putting the result into S3
 
 * Provision an S3 bucket with a cloud such as DigitalOcean, or with Minio and its helm chart
 
-* Configure `stack.yml` with the URL / host
+* Configure `stack.yml` with the `hostname` and `bucket_name`
 
 ```yaml
     environment:
-      s3_hostname: kubecon.fra1.digitaloceanspaces.com
+      s3_hostname: fra1.digitaloceanspaces.com
       s3_secure: true
+      s3_bucket_name: kubecon
 ```
 
 * Create your secrets

@@ -4,17 +4,17 @@ import uuid
 import os
 
 def handle(body):
-    secure = True if os.getenv('s3_tls', "false") == "true" else False
-
+    secure = True if os.getenv("s3_tls", "false") == "true" else False
+    bucket_name = os.getenv("s3_bucket_name")
     access_key = get_secret("access-key")
     secret_key = get_secret("secret-key")
 
-    mc = Minio(os.environ['s3_hostname'],
+    mc = Minio(os.environ["s3_hostname"],
                   access_key = access_key,
                   secret_key = secret_key,
                   secure = secure)
 
-    download_push(body.encode(), mc)
+    download_push(body.encode(), bucket_name, mc)
 
 def get_secret(key):
     val = ""
@@ -22,7 +22,7 @@ def get_secret(key):
         val = f.read()
     return val
 
-def download_push(body, mc):
+def download_push(body, bucket_name, mc):
     # write to temporary file
     file_name = get_temp_file()
     f = open("/tmp/" + file_name, "wb")
@@ -30,7 +30,7 @@ def download_push(body, mc):
     f.close()
 
     # sync to Minio
-    mc.fput_object("incoming", file_name, "/tmp/" + file_name)
+    mc.fput_object(bucket_name, file_name, "/tmp/" + file_name)
 
     return file_name
 
