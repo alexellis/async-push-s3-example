@@ -2,6 +2,12 @@
 
 Example of invoking a function and putting the result into S3
 
+## Pre-reqs
+
+* Access to s3 storage - on the cloud or via Minio
+* OpenFaaS deployed on Kubernetes or Swarm
+* `faas-cli`
+
 ## Get started
 
 * Provision an S3 bucket with a cloud such as DigitalOcean, or with Minio and its helm chart
@@ -73,3 +79,5 @@ You can also find the filename from the logs of the function, or the queue-worke
 2019/06/05 08:48:59 Duration: 0.699364 seconds
 {"file": "8eb7e2c1-6a62-49b7-976e-a097b73141eb"}
 ```
+
+![](./docs/s3-results.png)
