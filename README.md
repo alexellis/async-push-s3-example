@@ -4,13 +4,13 @@ Example of invoking a function and putting the result into S3
 
 ## Pre-reqs
 
-* Access to s3 storage - on the cloud or via Minio
-* OpenFaaS deployed on Kubernetes or Swarm
-* `faas-cli`
+* Access to S3 storage - on [AWS](https://aws.amazon.com/s3/), [DigitalOcean](https://www.digitalocean.com/products/spaces/) or via [Minio](https://min.io)
+* [OpenFaaS](https://docs.openfas.com) deployed on Kubernetes or Swarm
+* [faas-cli](https://github.com/openfaas/faas-cli/)
 
 ## Get started
 
-* Provision an S3 bucket with a cloud such as DigitalOcean, or with Minio and its helm chart
+* Provision your S3 bucket and note down the credentials / URL / regions
 
 * Configure `stack.yml` with the `hostname` and `bucket_name`
 
