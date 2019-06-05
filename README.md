@@ -2,6 +2,14 @@
 
 Example of invoking a function and putting the result into S3
 
+## Use-case
+
+Running code asynchronously means that the user, invoker or event-producer does not need to wait for a response before continuing their work.
+
+An example might be that a new sales lead comes in via SalesForce.com. Normally we may receive a webhook invocation, do our work synchronously and then give a status code back. If we need to do something that takes a few seconds such as sending an email, then we can decouple the work and respond instantly to SalesForce and let the email function run via a queue-worker.
+
+> Read more: [Async in OpenFaaS](https://docs.openfaas.com/reference/async/)
+
 ## Pre-reqs
 
 * Access to S3 storage - on [AWS](https://aws.amazon.com/s3/), [DigitalOcean](https://www.digitalocean.com/products/spaces/) or via [Minio](https://min.io)
