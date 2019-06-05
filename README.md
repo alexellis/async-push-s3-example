@@ -59,10 +59,17 @@ You can pick a random image from [this link](https://commons.wikimedia.org/wiki/
 ```sh
 export URL="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Haut_Santenay_Vue_d%27ensemble_18.jpg/1600px-Haut_Santenay_Vue_d%27ensemble_18.jpg"
 
-echo -n "${URL}" | faas-cli invoke --async inception -H "X-Callback-Url=http://gateway:8080/function/push-s3"
+echo -n "${URL}" | faas-cli invoke --async inception -H "X-Callback-Url=http://gateway.openfaas:8080/function/push-s3"
 ```
 
 > Note: if using Swarm, then change `http://gateway.openfaas:8080` to `http://gateway:8080`.
 
 * Head over to your s3 bucket, and you'll see the result available for download
 
+You can also find the filename from the logs of the function, or the queue-worker.
+
+```sh
+2019/06/05 08:48:59 stderr: Endpoint: fra1.digitaloceanspaces.com, secure: True
+2019/06/05 08:48:59 Duration: 0.699364 seconds
+{"file": "8eb7e2c1-6a62-49b7-976e-a097b73141eb"}
+```
