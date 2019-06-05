@@ -3,9 +3,7 @@ import json
 import uuid
 import os
 
-def handle(st):
-    req = json.loads(st)
-
+def handle(body):
     secure = True if os.getenv('s3_tls', "false") == "true" else False
 
     access_key = get_secret("access-key")
@@ -16,7 +14,7 @@ def handle(st):
                   secret_key = secret_key,
                   secure = secure)
 
-    download_push(st, mc)
+    download_push(body.encode(), mc)
 
 def get_secret(key):
     val = ""
@@ -24,11 +22,11 @@ def get_secret(key):
         val = f.read()
     return val
 
-def download_push(st, mc):
+def download_push(body, mc):
     # write to temporary file
     file_name = get_temp_file()
     f = open("/tmp/" + file_name, "wb")
-    f.write(r.content)
+    f.write(body)
     f.close()
 
     # sync to Minio
