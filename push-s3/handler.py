@@ -20,7 +20,7 @@ def handle(st):
 
 def get_secret(key):
     val = ""
-    with open("/var/openfaas/secrets" + key) as f:
+    with open("/var/openfaas/secrets/" + key) as f:
         val = f.read()
     return val
 
